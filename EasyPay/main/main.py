@@ -5,11 +5,12 @@ parentdir = os.path.dirname(currentdir)
 sys.path.append(parentdir)
 
 from business.control.SystemControl import SystemControl
+from business.command.Prompt import Prompt
 from view.home import home_view
 
 system = SystemControl()
 system.start()
-system.prompt(home_view)
+Prompt(home_view)
 system.end()
 
 

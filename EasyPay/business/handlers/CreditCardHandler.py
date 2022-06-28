@@ -1,4 +1,4 @@
-from infra.handler.Handler import Handler
+from business.handlers.Handler import Handler
 from business.model.Request import CreditCardRequest
 from business.model.Payment import Payment
 from business.control.PaymentControl import PaymentControl

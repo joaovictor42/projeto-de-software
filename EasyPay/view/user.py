@@ -1,5 +1,6 @@
 from business.control.SystemControl import SystemControl
 from view.pay_request import pay_request_view
+from business.command.Processsing import Processing
 import os
 
 
@@ -27,7 +28,7 @@ def user_view():
         elif option == '3':
             payment_history()
         elif option == '4':
-            system.processing()
+            Processing()
         else: 
             print('Opção Inválida')
             input('[Enter] para continuar')
