@@ -3,7 +3,9 @@ from business.model.User import User
 from business.model.Date import Date
 from datetime import date
 from playhouse.shortcuts import model_to_dict
-
+from itertools import count
+from infra.memento.Memento import Memento
+from business.model.UserMemento import UserMemento
 
 class UserAdapter:
 
@@ -81,6 +83,13 @@ class UserAdapter:
         print(f'Senha: {self.password}')
         print(f'Nascimento: {self.birth}')
         print(f'Pix: {self.pix}\n')
+
+    def save(self) -> Memento:
+        return UserMemento(self.to_dict())
+
+    def restore(self, memento: Memento) -> None:
+        for key, value in memento.get_state().items():
+            setattr(self, key, value)
 
     def __lt__(self, other):
         if not isinstance(other, UserAdapter):

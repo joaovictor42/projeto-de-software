@@ -16,7 +16,8 @@ def user_manager_view():
         print('3 - Visualizar Usuário')
         print('4 - Adicionar Usuário')
         print('5 - Alterar Usuário')
-        print('6 - Deletar Usuário')
+        print('6 - Desfazer Alteração') 
+        print('7 - Deletar Usuário')
         print('0 - Voltar\n')
 
         option = input('Opção: ')
@@ -33,6 +34,8 @@ def user_manager_view():
         elif option == '5':
             update_user()
         elif option == '6':
+            user_control.undo()
+        elif option == '7':
             del_user()
         else:
             print('Opção Inválida')

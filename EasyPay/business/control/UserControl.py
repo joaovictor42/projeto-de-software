@@ -9,6 +9,7 @@ from util.DateCompare import DateCompare
 class UserControl(metaclass=SingletonMeta):
 
     def __init__(self) -> None:
+        self._mementos = []
         self._users = SortedList()
 
     @property
@@ -32,6 +33,7 @@ class UserControl(metaclass=SingletonMeta):
         user = self.select(id)
         if not set(updates).issubset(dir(user)):
             raise AttributeError
+        self.backup(user)
         for key, value in updates.items():
             setattr(user, key, value)
 
@@ -55,6 +57,22 @@ class UserControl(metaclass=SingletonMeta):
             print(f'Nome: {user.name}')
             print(f'Email: {user.email}')
             print(f'Nascimento: {user.birth}\n')
+        input('[Enter] para continuar')
+
+    def backup(self, user: UserAdapter) -> None:
+        self._mementos.append(user.save())
+
+    def undo(self) -> None:
+        os.system('clear')
+        if not len(self._mementos):
+            print('Sem História\n')
+            input('[Enter] para continuar')
+            return
+
+        memento = self._mementos.pop()
+        user = self.select(memento.origin)
+        user.restore(memento)
+        print('Alteração Desfeita!\n')
         input('[Enter] para continuar')
 
     def migrate(self):
