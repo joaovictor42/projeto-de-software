@@ -1,6 +1,10 @@
 import os
 from business.model.Request import Request
 from infra.metaclass.SingletonMeta import SingletonMeta
+from util.track_stats import tracker
+from business.control.StatsControl import StatsControl
+
+stats_control = StatsControl()
 
 class RequestControl(metaclass=SingletonMeta):
 
@@ -11,6 +15,7 @@ class RequestControl(metaclass=SingletonMeta):
     def requests(self):
         return self._requests.values()
 
+    @tracker(stats_control.inc_requests)
     def insert(self, request: Request) -> None:
         self._requests[request.id] = request
     

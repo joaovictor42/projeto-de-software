@@ -3,6 +3,8 @@ from business.control.SessionControl import SessionControl
 from view.user_manager import user_manager_view
 from view.pay_manager import pay_manager_view
 from view.request_manager import request_manager_view
+from business.report.HtmlReport import HtmlReport
+from business.report.MdReport import MdReport
 
 
 session = SessionControl()

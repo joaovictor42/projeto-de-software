@@ -5,7 +5,6 @@ from business.handlers.DebitCardHandler import DebitCardHandler
 from business.handlers.PixHandler import PixHandler
 
 
-
 def process():
     handler = RequestHandler()
 

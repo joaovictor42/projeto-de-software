@@ -6,6 +6,7 @@ from infra.metaclass.SingletonMeta import SingletonMeta
 from infra.adapter.UserAdapter import UserAdapter
 from util.DateCompare import DateCompare
 
+
 class UserControl(metaclass=SingletonMeta):
 
     def __init__(self) -> None:
