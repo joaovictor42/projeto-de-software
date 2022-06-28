@@ -20,3 +20,9 @@ Repositório destinado as atividades desenvolvidas durante a disciplina Métodos
 <p align="center">
   <img src="./imagens/class diagram.png"/>
 </p>
+
+### Diagrama de Componentes (C4 - Nível 3)
+
+<p align="center">
+  <img src="./imagens/THIRD_LAYER.png"/>
+</p>
