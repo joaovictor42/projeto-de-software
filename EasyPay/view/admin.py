@@ -1,13 +1,13 @@
-import os
-from business.control.SessionControl import SessionControl
+from business.control.SystemControl import SystemControl
 from view.user_manager import user_manager_view
 from view.pay_manager import pay_manager_view
 from view.request_manager import request_manager_view
 from business.report.HtmlReport import HtmlReport
 from business.report.MdReport import MdReport
+import os
 
 
-session = SessionControl()
+system = SystemControl()
 
 def admin_view():
     while True:
@@ -22,7 +22,7 @@ def admin_view():
 
         option = input('Opção: ')
         if option == '0':
-            session.logout()
+            system.session.logout()
             return
         elif option == '1':
             user_manager_view()

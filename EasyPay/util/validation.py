@@ -24,10 +24,11 @@ def password(password: str) -> bool:
 
 
 def date(date: str) -> bool:
-    return True
+    constraint = r'^((0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[012])/20\d\d)$'
+    return re.match(constraint, date) is not None
 
 
 def pix(pix: str) -> bool:
-    return True
+    return 1 < len(pix) < 50 
 
 

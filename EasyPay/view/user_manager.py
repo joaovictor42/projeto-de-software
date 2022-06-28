@@ -1,11 +1,10 @@
-import os
+from business.control.SystemControl import SystemControl
 from business.model.User import User
-from business.control.UserControl import UserControl
-from business.control.SessionControl import SessionControl
 from util.InputField import *
+import os
 
-user_control = UserControl()
-session = SessionControl()
+system = SystemControl()
+
 
 def user_manager_view():
     while True:
@@ -24,9 +23,9 @@ def user_manager_view():
         if option == '0':
             return
         elif option == '1':
-            user_control.list()
+            system.user_control.list()
         elif option == '2':
-            user_control.list_by_birth()
+            system.user_control.list_by_birth()
         elif option == '3':
             select_user()
         elif option == '4':
@@ -34,7 +33,7 @@ def user_manager_view():
         elif option == '5':
             update_user()
         elif option == '6':
-            user_control.undo()
+            system.user_control.undo()
         elif option == '7':
             del_user()
         else:
@@ -46,10 +45,10 @@ def select_user():
     os.system('clear')
     print('Selecionar Usuário\n')
 
-    id = int(input('ID do Usuário: '))
     try:
-        user = user_control.select(id)
-    except KeyError:
+        id = int(input('ID do Usuário: '))
+        user = system.user_control.select(id)
+    except:
         print('\nUsuário não encontrado!')
     else:
         os.system('clear')
@@ -81,7 +80,7 @@ def create_user():
                 return
 
     new_user = User(**info) 
-    user_control.insert(new_user)
+    system.user_control.insert(new_user)
     new_user.save()
     
     print('\nUsuário criado!')
@@ -92,10 +91,10 @@ def update_user():
     os.system('clear')
     print('Alterar Usuário\n')
 
-    id = int(input('ID do Usuário: '))
     try:
-        user = user_control.select(id)
-    except KeyError:
+        id = int(input('ID do Usuário: '))
+        user = system.user_control.select(id)
+    except:
         print('\nO usuário não existe!')
         input('[Enter] para continuar')
         return 
@@ -118,7 +117,7 @@ def update_user():
                 break
     user_info = user.to_dict()
     user_info.update(updates)
-    user_control.update(user.id, user_info)
+    system.user_control.update(user.id, user_info)
 
     print('\nCadastro atualizado')
     input('[Enter] para continuar')
@@ -128,10 +127,10 @@ def del_user():
     os.system('clear')
     print('Deletar Usuário\n')
 
-    id = int(input('ID do Usuário: '))
     try:
-        user_control.delete(id)
-    except KeyError:
+        id = int(input('ID do Usuário: '))
+        system.user_control.delete(id)
+    except:
         print('\nO usuário não existe!')
     else:
         print('\nUsuário deletado')

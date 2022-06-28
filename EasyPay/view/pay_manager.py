@@ -1,7 +1,8 @@
+from business.control.SystemControl import SystemControl
 import os
-from business.control.PaymentControl import PaymentControl
 
-payment_control = PaymentControl()
+system = SystemControl()
+
 
 def pay_manager_view():
     while True:
@@ -15,7 +16,7 @@ def pay_manager_view():
         if option == '0':
             return
         elif option == '1':
-            payment_control.list()
+            system.payment_control.list()
         elif option == '2':
             select_request()
         else:
@@ -27,10 +28,10 @@ def select_request():
     os.system('clear')
     print('Selecionar Pagamento\n')
 
-    id = int(input('ID do Pagamento: '))
     try:
-        request = payment_control.select(id)
-    except KeyError:
+        id = int(input('ID do Pagamento: '))
+        request = system.payment_control.select(id)
+    except:
         print('\Pagamento não encontrado!')
     else:
         os.system('clear')

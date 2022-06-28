@@ -1,12 +1,11 @@
-import os
-from business.control.SessionControl import SessionControl
-from business.control.UserControl import UserControl
-from util import login
+from business.control.SystemControl import SystemControl
 from view.admin import admin_view
 from view.user import user_view
+from util import login
+import os
 
-session = SessionControl() 
-user_control = UserControl()
+system = SystemControl()
+
 
 def home_view():
     while True:
@@ -24,9 +23,7 @@ def home_view():
                 continue
             else:
                 return
-
-        user = user_control.select(id)
-        session.login(user)
+        user = system.login(id)
         if user.admin:
             admin_view()
         else:

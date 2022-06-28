@@ -1,8 +1,9 @@
-import os
+from business.control.SystemControl import SystemControl
 from infra.factory.RequestFactory import *
-from business.control.RequestControl import RequestControl
+import os
 
-request_control = RequestControl()
+system = SystemControl()
+
 
 def pay_request_view():
     while True:
@@ -40,7 +41,7 @@ def credit_card_view():
     request['flag']          = input('Bandeira: ')
 
     new_request = CreditCardRequestCreator.factory(request)
-    request_control.insert(new_request)
+    system.request_control.insert(new_request)
 
     print('\nSolicitação em análise...')
     input('[Enter] para continuar')
@@ -59,7 +60,7 @@ def debit_card_view():
     request['flag']          = input('Bandeira: ')
 
     new_request = DebitCardRequestCreator.factory(request)
-    request_control.insert(new_request)
+    system.request_control.insert(new_request)
 
     print('\nSolicitação em análise...')
     input('[Enter] para continuar')
@@ -70,11 +71,13 @@ def pix_view():
     print('Pix\n')
 
     name = input('Comprador: ')
-    purchase = float(input('Valor da Compra: '))
-    new_request = PixRequestCreator.factory(name, purchase)
-    request_control.insert(new_request)
-
-    print(f'Código Pix: {new_request.code}\n')
+    try:
+        purchase = float(input('Valor da Compra: '))
+        new_request = PixRequestCreator.factory(name, purchase)
+        system.request_control.insert(new_request)
+        print(f'Código Pix: {new_request.code}\n')   
+    except:
+        print('Valor Inválido\n')
     input('[Enter] para continuar')
 
 

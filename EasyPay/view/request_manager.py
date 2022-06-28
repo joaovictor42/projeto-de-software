@@ -1,7 +1,8 @@
+from business.control.SystemControl import SystemControl
 import os
-from business.control.RequestControl import RequestControl
 
-request_control = RequestControl()
+system = SystemControl()
+
 
 def request_manager_view():
     while True:
@@ -16,7 +17,7 @@ def request_manager_view():
         if option == '0':
             return
         elif option == '1':
-            request_control.list()
+            system.request_control.list()
         elif option == '2':
             select_request()
         elif option == '3':
@@ -30,10 +31,10 @@ def select_request():
     os.system('clear')
     print('Selecionar Solicitação\n')
 
-    id = int(input('ID da Solicitação: '))
     try:
-        request = request_control.select(id)
-    except KeyError:
+        id = int(input('ID da Solicitação: '))
+        request = system.request_control.select(id)
+    except:
         print('\nSolicitação não encontrada!')
     else:
         os.system('clear')
@@ -46,10 +47,10 @@ def del_request():
     os.system('clear')
     print('Remover Solicitação\n')
 
-    id = int(input('ID da Solicitação: '))
     try:
-        request_control.delete(id)
-    except KeyError:
+        id = int(input('ID da Solicitação: '))
+        system.request_control.delete(id)
+    except:
         print('\nSolicitação não encontrada!')
     else:
         print('\nSolicitação deletada')
